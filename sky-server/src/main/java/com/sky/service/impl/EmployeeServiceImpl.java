@@ -1,6 +1,7 @@
 package com.sky.service.impl;
 
 import com.sky.constant.MessageConstant;
+import com.sky.constant.PasswordConstant;
 import com.sky.constant.StatusConstant;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
@@ -10,9 +11,12 @@ import com.sky.exception.AccountNotFoundException;
 import com.sky.exception.PasswordErrorException;
 import com.sky.mapper.EmployeeMapper;
 import com.sky.service.EmployeeService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.time.LocalDateTime;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -61,6 +65,23 @@ public class EmployeeServiceImpl implements EmployeeService {
  */
     @Override
     public void save(EmployeeDTO employeedto) {
+        //1、获取员工信息
+         Employee employee =  new Employee();
+         BeanUtils.copyProperties(employeedto,employee);
+         //设置账号状态
+         employee.setStatus(StatusConstant.ENABLE);
+
+        //设置默认密码并加密
+        String md5Password = DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes());
+        employee.setPassword(md5Password);
+        //记录当前的日期和修改人
+        employee.setCreateTime(LocalDateTime.now());
+        employee.setCreateUser(1L);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(1L);
+
+        //3、保存员工信息
+        employeeMapper.insert(employee);
 
     }
 
