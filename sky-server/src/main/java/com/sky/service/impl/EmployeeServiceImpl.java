@@ -107,6 +107,14 @@ public class EmployeeServiceImpl implements EmployeeService {
         //3、返回分页结果
         return  new PageResult(total,records);
     }
+
+    @Override
+    public void updateEmployeeStatus(Long id, Integer status) {
+
+        employeeMapper.update(id,status);
+    }
+
+
 }
 
 

@@ -88,16 +88,25 @@ public class EmployeeController {
     }
     /**
      * 启用、禁用员工账号
-     * @param employeedto
+     * @param  status
      * @return
      */
-    @PostMapping("/status")
+
     @ApiOperation(value = "启用、禁用员工账号")
-    public Result  status(@RequestBody EmployeeDTO employeedto) {
-        log.info("启用、禁用员工账号 ：{}", employeedto);
-        employeeService.save(employeedto);
+    @PostMapping("/status/{status}")
+    public Result updateEmployeeStatus(
+            @PathVariable("status") Integer status,
+            @RequestParam("id") Long id)
+    {
+        log.info("启用、禁用员工账号 ：{}", status);
+        employeeService.updateEmployeeStatus(id,status);
         return Result.success();
     }
+     //@PostMapping("/status/{status}")
+    //    public ResponseEntity<Result> updateEmployeeStatus(
+    //            @PathVariable("status") Integer status,
+    //            @RequestParam("id") Long id
+    //    ) {
     /**
      * 员工分页查询
      * @param  employeePageQueryDTO
@@ -105,7 +114,7 @@ public class EmployeeController {
      */
     @GetMapping("/page")
     @ApiOperation(value = "员工分页查询")
-    public Result<PageResult> page(EmployeePageQueryDTO employeePageQueryDTO) {
+    public Result<PageResult> page( EmployeePageQueryDTO employeePageQueryDTO) {
         log.info("员工分页查询 ：{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
