@@ -42,4 +42,11 @@ public interface EmployeeMapper {
      */
     @Update("update employee set status = #{status} where id = #{id}")
     void update(Long id, Integer status);
+
+    /**
+     * 根据id查询员工信息
+     * @param id
+     */
+    @Select("select * from employee where id = #{id}")
+    Employee selectemployeeById(Long id);
 }

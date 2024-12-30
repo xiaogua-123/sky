@@ -16,7 +16,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -118,5 +117,17 @@ public class EmployeeController {
         log.info("员工分页查询 ：{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+    /**
+     * 员工详情
+     * @param  id
+     */
+    @GetMapping("/{id}")
+    @ApiOperation(value = "根据id查询员工")
+    public Result<Employee> get(@PathVariable("id") Long id) {
+
+        log.info("根据id查询员工 ：{}", id);
+        Employee employee = employeeService.getemployeeById(id);
+        return Result.success(employee );
     }
 }

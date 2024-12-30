@@ -32,4 +32,6 @@ public interface EmployeeService {
      * @param status
      */
     void updateEmployeeStatus(Long id, Integer status);
+
+    Employee getemployeeById(Long id);
 }
