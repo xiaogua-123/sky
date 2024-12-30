@@ -94,7 +94,7 @@ public class EmployeeController {
     @PostMapping("/status")
     @ApiOperation(value = "启用、禁用员工账号")
     public Result  status(@RequestBody EmployeeDTO employeedto) {
-        log.info("新增员工 ：{}", employeedto);
+        log.info("启用、禁用员工账号 ：{}", employeedto);
         employeeService.save(employeedto);
         return Result.success();
     }
