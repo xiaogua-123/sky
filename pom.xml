@@ -104,6 +104,18 @@
                 <artifactId>jaxb-api</artifactId>
                 <version>${jaxb-api}</version>
             </dependency>
+            <!--自行添加的依赖 beanutils-->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>1.9.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot</artifactId>
+                <version>${pagehelper}</version>
+            </dependency>
 
             <!-- poi -->
             <dependency>
