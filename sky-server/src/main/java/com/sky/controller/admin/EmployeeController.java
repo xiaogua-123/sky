@@ -101,11 +101,6 @@ public class EmployeeController {
         employeeService.updateEmployeeStatus(id,status);
         return Result.success();
     }
-     //@PostMapping("/status/{status}")
-    //    public ResponseEntity<Result> updateEmployeeStatus(
-    //            @PathVariable("status") Integer status,
-    //            @RequestParam("id") Long id
-    //    ) {
     /**
      * 员工分页查询
      * @param  employeePageQueryDTO
@@ -119,7 +114,7 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
     /**
-     * 员工详情
+     * 根据id查询员工
      * @param  id
      */
     @GetMapping("/{id}")
@@ -130,4 +125,16 @@ public class EmployeeController {
         Employee employee = employeeService.getemployeeById(id);
         return Result.success(employee );
     }
+    /**
+     * 修改员工信息
+     * @param  employeedto
+     * @return
+     */
+    @PutMapping("")
+    @ApiOperation(value = "修改员工信息")
+     public Result updateEmployee(@RequestBody EmployeeDTO employeedto) {
+         log.info("修改员工信息 ：{}", employeedto);
+         employeeService.updateEmployee(employeedto);
+         return Result.success();
+     }
 }
