@@ -12,7 +12,7 @@
         </where>
         ORDER BY create_time DESC
     </select>
-    <update id="updateEmployee" parameterType="Employee">
+    <update id="update" parameterType="Employee">
         UPDATE employee
     <set>
         <if test="username!= null and username!= ''">

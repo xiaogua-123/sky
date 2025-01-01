@@ -1,9 +1,11 @@
 package com.sky.mapper;
 
 import com.github.pagehelper.Page;
+import com.sky.annotation.AutoFill;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeePageQueryDTO;
 import com.sky.entity.Employee;
+import com.sky.enumeration.OperationType;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -28,7 +30,9 @@ public interface EmployeeMapper {
         " status, create_time, update_time, create_user, update_user)" +
         " values(#{username}, #{name}, #{password}, #{phone}, #{sex}, #{idNumber}, #{status}," +
         " #{createTime}, #{updateTime}, #{createUser}, #{updateUser})")
-         void insert(Employee employee);
+    @AutoFill(value = OperationType.INSERT)
+    void insert(Employee employee);
+
     /**
      * 分页查询员工信息
      * @param employeePageQueryDTO
@@ -38,11 +42,11 @@ public interface EmployeeMapper {
 
     /**
      * 更新员工状态
-     * @param id
-     * @param status
+     * @param employee
      */
-    @Update("update employee set status = #{status} where id = #{id}")
-    void update(Long id, Integer status);
+
+    @AutoFill(value = OperationType.UPDATE)
+    void update(Employee  employee);
 
     /**
      * 根据id查询员工信息
@@ -51,5 +55,5 @@ public interface EmployeeMapper {
     @Select("select * from employee where id = #{id}")
     Employee selectemployeeById(Long id);
 
-    void updateEmployee(Employee employee);
+
 }
